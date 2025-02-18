@@ -8,8 +8,11 @@ import Navbar from '@/components/Navbar';
 export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
   const [address, setAddress] = useState('');
   const [hcaptchaToken, setHcaptchaToken] = useState('');
-  const [message, setMessage] = useState('');
   const [isClaiming, setIsClaiming] = useState(false);
+
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+
 
   const onVerifyCaptcha = (token) => {
     setHcaptchaToken(token);
@@ -18,6 +21,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
   const handleClaim = async () => {
     setIsClaiming(true);
     setMessage('');
+    setMessageType('');
 
     try {
       const res = await fetch('/api/claim', {
@@ -28,12 +32,15 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage(`Success! TxID: ${data.txid}`);
+        setMessage(`Success! You can use the faucet again in one hour!\n TxID: ${data.txid}`);
+        setMessageType('success');
       } else {
         setMessage(`Error: ${data.error}`);
+        setMessageType('error');
       }
     } catch (error) {
       setMessage('An unexpected error occurred.');
+      setMessageType('error');
     }
 
     setIsClaiming(false);
@@ -120,7 +127,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
 
             {/* Message */}
             {message && (
-              <div className="mt-4 text-red-400 font-semibold text-center">
+              <div className={`mt-4 text-red-400 font-semibold text-center ${messageType === 'success' ? 'text-green-200' : 'text-red-400'}`}>
                 {message}
               </div>
             )}
