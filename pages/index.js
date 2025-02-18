@@ -1,6 +1,6 @@
 // pages/index.js
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { callFlopcoin } from '../lib/flopcoinRPC';
 import Navbar from '@/components/Navbar';
@@ -10,6 +10,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
   const [hcaptchaToken, setHcaptchaToken] = useState('');
   const [message, setMessage] = useState('');
   const [isClaiming, setIsClaiming] = useState(false);
+  const hcaptchaRef = useRef(null);
 
   const onVerifyCaptcha = (token) => {
     setHcaptchaToken(token);
@@ -31,9 +32,18 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
         setMessage(`Success! You can use the faucet again in one hour!\n TxID: ${data.txid}`);
       } else {
         setMessage(`Error: ${data.error}`);
+        // Reset the hCaptcha widget so a new token is generated
+        if (hcaptchaRef.current) {
+          hcaptchaRef.current.resetCaptcha();
+        }
+        setHcaptchaToken('');
       }
     } catch (error) {
       setMessage('An unexpected error occurred.');
+      if (hcaptchaRef.current) {
+        hcaptchaRef.current.resetCaptcha();
+      }
+      setHcaptchaToken('');
     }
 
     setIsClaiming(false);
@@ -44,9 +54,8 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
       {/* Navbar */}
       <Navbar />
 
-      {/* Main Content - removed vertical centering */}
+      {/* Main Content */}
       <main className="flex-grow flex justify-center">
-        {/* Updated container with responsive horizontal padding */}
         <div className="w-full max-w-2xl px-6 sm:px-4 p-1 pt-0">
           {/* Banner Image */}
           <div className="w-full">
@@ -113,6 +122,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
             {/* hCaptcha */}
             <div className="mt-8 flex justify-center">
               <HCaptcha
+                ref={hcaptchaRef}
                 sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
                 onVerify={onVerifyCaptcha}
               />
@@ -120,7 +130,11 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
 
             {/* Message */}
             {message && (
-              <div className={`mt-4 font-semibold text-center ${message.startsWith("Success") ? "text-green-400" : "text-red-400"}`}>
+              <div
+                className={`mt-4 font-semibold text-center ${
+                  message.startsWith('Success') ? 'text-green-400' : 'text-red-400'
+                }`}
+              >
                 {message}
               </div>
             )}
