@@ -5,6 +5,7 @@ import axios from 'axios';
 const claimHistory = {};
 
 export default async function handler(req, res) {
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -48,7 +49,7 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'You have already claimed in the last hour!' });
   }
 
-  // 3) Send 100 FLOP via RPC to the provided address
+  // 3) Send FLOP reward via RPC to the provided address
   try {
     // Optionally, you can validate the address first:
     const validate = await callFlopcoin('validateaddress', [address]);
@@ -56,7 +57,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid FLOP address!' });
     }
 
-    const amountToSend = 100; // 100 FLOP per claim
+    const amountToSend = process.env.FAUCET_REWARD; // get FLOP reward per claim from config
     const txid = await callFlopcoin('sendtoaddress', [address, amountToSend]);
 
     // 4) Record the claim to enforce the one-hour limit

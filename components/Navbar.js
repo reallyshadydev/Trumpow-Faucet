@@ -14,23 +14,17 @@ export default function Navbar() {
           <Image
             src="/navbar-logo.png"
             alt="Faucet Logo"
-            width={200}  // desired width
-            height={80}  // desired height
+            width={200} // desired width
+            height={80} // desired height
             objectFit="contain"
           />
         </div>
         {/* Desktop nav links */}
         <nav className="hidden md:flex items-center space-x-4">
-          <Link
-            href="/"
-            className="hover:text-[#e979be] text-lg font-ubuntu"
-          >
+          <Link href="/" className="hover:text-[#e979be] text-lg font-ubuntu">
             Home
           </Link>
-          <Link
-            href="/donate"
-            className="hover:text-[#e979be] text-lg font-ubuntu"
-          >
+          <Link href="/donate" className="hover:text-[#e979be] text-lg font-ubuntu">
             Donate
           </Link>
           <Link
@@ -44,10 +38,7 @@ export default function Navbar() {
         </nav>
         {/* Hamburger icon for mobile */}
         <div className="md:hidden">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-white focus:outline-none"
-          >
+          <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
@@ -55,12 +46,11 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-[#212121] border-t border-gray-700">
-          {/* Center the menu container overall, but align text to left */}
-          <nav className="w-full max-w-sm mx-auto flex flex-col items-start px-0 py-2 space-y-2">
+          <nav className="flex flex-col items-center px-4 py-2 space-y-4">
             <Link legacyBehavior href="/">
               <a
                 onClick={() => setIsOpen(false)}
-                className="hover:text-[#e979be] text-lg font-ubuntu"
+                className="w-full text-center hover:text-[#e979be] text-lg font-ubuntu border-b border-gray-700 pb-2"
               >
                 Home
               </a>
@@ -68,7 +58,7 @@ export default function Navbar() {
             <Link legacyBehavior href="/donate">
               <a
                 onClick={() => setIsOpen(false)}
-                className="hover:text-[#e979be] text-lg font-ubuntu"
+                className="w-full text-center hover:text-[#e979be] text-lg font-ubuntu border-b border-gray-700 pb-2"
               >
                 Donate
               </a>
@@ -78,7 +68,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="bg-[#df3da1] text-white px-4 py-2 rounded text-lg font-ubuntu hover:bg-[#ce228c]"
+                className="w-full text-center bg-[#df3da1] text-white px-4 py-2 rounded text-lg font-ubuntu hover:bg-[#ce228c]"
               >
                 Flopcoin.net
               </a>
