@@ -23,13 +23,13 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center space-x-4">
           <Link
             href="/"
-            className="hover:text-[#e979be] text-l font-ubuntu"
+            className="hover:text-[#e979be] text-lg font-ubuntu"
           >
             Home
           </Link>
           <Link
             href="/donate"
-            className="hover:text-[#e979be] text-l font-ubuntu"
+            className="hover:text-[#e979be] text-lg font-ubuntu"
           >
             Donate
           </Link>
@@ -37,7 +37,7 @@ export default function Navbar() {
             href="https://flopcoin.net"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#df3da1] text-white px-4 py-2 rounded text-l font-ubuntu hover:bg-[#ce228c] hover:text-white"
+            className="bg-[#df3da1] text-white px-4 py-2 rounded text-lg font-ubuntu hover:bg-[#ce228c] hover:text-white"
           >
             Flopcoin.net
           </Link>
@@ -60,7 +60,7 @@ export default function Navbar() {
             <Link legacyBehavior href="/">
               <a
                 onClick={() => setIsOpen(false)}
-                className="hover:text-[#e979be] text-l font-ubuntu"
+                className="hover:text-[#e979be] text-lg font-ubuntu"
               >
                 Home
               </a>
@@ -68,7 +68,7 @@ export default function Navbar() {
             <Link legacyBehavior href="/donate">
               <a
                 onClick={() => setIsOpen(false)}
-                className="hover:text-[#e979be] text-l font-ubuntu"
+                className="hover:text-[#e979be] text-lg font-ubuntu"
               >
                 Donate
               </a>
@@ -78,7 +78,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="bg-[#df3da1] text-white px-4 py-2 rounded text-l font-ubuntu hover:bg-[#ce228c]"
+                className="bg-[#df3da1] text-white px-4 py-2 rounded text-lg font-ubuntu hover:bg-[#ce228c]"
               >
                 Flopcoin.net
               </a>

@@ -61,25 +61,25 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
           {/* Stats Block */}
           <div className="flex justify-center mt-1">
             <div className="text-left text-gray-300 space-y-1 mb-4 text-base leading-normal">
-              <p className="flex items-center">
+              <p className="flex items-center text-xl">
                 <span className="mr-2 text-xl">⏰</span>
                 <span>
                   You can claim <b>100 FLOP</b> every hour.
                 </span>
               </p>
-              <p className="flex items-center">
-                <span className="mr-2 text-xl">🏦</span>
+              <p className="flex items-center text-xl">
+                <span className="mr-2">🏦</span>
                 <span>
                   Faucet Balance: <b>{faucetBalance} FLOP</b>
                 </span>
               </p>
-              <p className="flex items-center">
+              <p className="flex items-center text-xl">
                 <span className="mr-2 text-xl">💰</span>
                 <span>
                   Total Paid Out: <b>{totalPaidOut} FLOP</b>
                 </span>
               </p>
-              <p className="flex items-center">
+              <p className="flex items-center text-xl">
                 <span className="mr-2 text-xl">❤️</span>
                 <span>
                   <a href="/donate" className="underline text-[#e979be] hover:text-[#e979be]">
