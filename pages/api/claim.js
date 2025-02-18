@@ -1,26 +1,13 @@
+// pages/api/claim.js
+
 import { callFlopcoin } from '../../lib/flopcoinRPC';
 import axios from 'axios';
 
-// In-memory rate limiting store
+// In-memory rate limiting store keyed by fingerprint
 const claimHistory = {};
 
 /**
- * Extracts a user identifier (IP address) from the request.
- * Tries to use the X-Forwarded-For header (splitting multiple addresses),
- * falling back to the remote address.
- */
-function getUserIdentifier(req) {
-  const xForwardedFor = req.headers['x-forwarded-for'];
-  if (xForwardedFor) {
-    // If there are multiple IPs, take the first one.
-    return xForwardedFor.split(',')[0].trim();
-  }
-  return req.socket.remoteAddress;
-}
-
-/**
- * Optionally clean expired entries.
- * This helps prevent the in-memory store from growing indefinitely.
+ * Optionally clean expired entries to keep the in-memory store small.
  */
 function cleanupClaimHistory() {
   const now = Date.now();
@@ -32,14 +19,13 @@ function cleanupClaimHistory() {
 }
 
 export default async function handler(req, res) {
-  // Only accept POST requests.
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { address, hcaptchaToken } = req.body;
-  if (!address || !hcaptchaToken) {
-    return res.status(400).json({ error: 'Missing address or hCaptcha token' });
+  const { address, hcaptchaToken, fingerprint } = req.body;
+  if (!address || !hcaptchaToken || !fingerprint) {
+    return res.status(400).json({ error: 'Missing address, hCaptcha token, or fingerprint' });
   }
 
   // 1) Verify hCaptcha token using URL-encoded form data.
@@ -66,21 +52,18 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Failed to verify captcha!' });
   }
 
-  // 2) Check rate limiting using a better user identifier.
-  // Clean up expired entries (optional but useful for a long-running server).
+  // 2) Check rate limiting using the fingerprint.
   cleanupClaimHistory();
 
-  const userIdentifier = getUserIdentifier(req);
   const now = Date.now();
   const oneHour = 1000 * 60 * 60;
 
-  if (claimHistory[userIdentifier] && claimHistory[userIdentifier] > now) {
+  if (claimHistory[fingerprint] && claimHistory[fingerprint] > now) {
     return res.status(429).json({ error: 'You have already claimed in the last hour!' });
   }
 
   // 3) Process the payout
   try {
-    // Validate the provided FLOP address.
     const validate = await callFlopcoin('validateaddress', [address]);
     if (!validate || !validate.isvalid) {
       return res.status(400).json({ error: 'Invalid FLOP address!' });
@@ -90,7 +73,7 @@ export default async function handler(req, res) {
     const txid = await callFlopcoin('sendtoaddress', [address, amountToSend]);
 
     // 4) Record the claim to enforce the one-hour limit.
-    claimHistory[userIdentifier] = now + oneHour;
+    claimHistory[fingerprint] = now + oneHour;
 
     return res.status(200).json({ txid });
   } catch (error) {

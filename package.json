@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^4.6.0",
     "@hcaptcha/react-hcaptcha": "^1.11.2",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
