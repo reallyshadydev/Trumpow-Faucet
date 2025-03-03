@@ -87,7 +87,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
                 <p className="flex items-center text-xl">
                   <span className="mr-2 text-xl">⏰</span>
                   <span>
-                    You can claim <b>100 FLOP</b> every hour.
+                    You can claim <b>{process.env.NEXT_PUBLIC_FAUCET_REWARD} FLOP</b> every hour.
                   </span>
                 </p>
                 <p className="flex items-center text-xl">
