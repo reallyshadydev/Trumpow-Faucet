@@ -174,15 +174,8 @@ export async function getServerSideProps() {
 
   // Fetch the transaction history with a larger count
   try {
-    const transactions = await callFlopcoin('listtransactions', ["*", 1000]);
-    if (Array.isArray(transactions)) {
-      transactions.forEach((tx) => {
-        if (tx.category === 'send') {
-          totalPaidOut += Math.abs(tx.amount);
-          numPayouts += 1;
-        }
-      });
-    }
+    let totalReceived = await callFlopcoin('getreceivedbyaddress', [process.env.NEXT_PUBLIC_FAUCET_ADDRESS]);
+    totalPaidOut = totalReceived - faucetBalance;
   } catch (err) {
     console.error('Error fetching transactions:', err);
   }
