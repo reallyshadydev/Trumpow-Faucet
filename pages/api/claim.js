@@ -86,7 +86,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid FLOP address!' });
     }
 
-    const amountToSend = process.env.FAUCET_REWARD; // FLOP reward per claim from config
+    const amountToSend = process.env.NEXT_PUBLIC_FAUCET_REWARD; // FLOP reward per claim from config
     const txid = await callFlopcoin('sendtoaddress', [address, amountToSend]);
 
     // 4) Record the claim to enforce the one-hour limit.
