@@ -1,40 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🚰 FlopFaucet
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+[![JavaScript](https://img.shields.io/badge/JavaScript-81.9%25-yellow.svg)]()
+[![CSS](https://img.shields.io/badge/CSS-18.1%25-blue.svg)]()
+[![License](https://img.shields.io/github/license/TechnoVisionDev/FlopFaucet)](LICENSE)
+[![Issues](https://img.shields.io/github/issues/TechnoVisionDev/FlopFaucet)](https://github.com/TechnoVisionDev/FlopFaucet/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/TechnoVisionDev/FlopFaucet)](https://github.com/TechnoVisionDev/FlopFaucet/pulls)
 
+_A web-based faucet for distributing free Flopcoin (FLOP) to the community! 🪙_
+
+</div>
+
+## 📝 Description
+
+FlopFaucet is a web application designed to distribute free Flopcoin (FLOP) to community members. This faucet serves as an entry point for new users to obtain their initial FLOP tokens and participate in the Flopcoin ecosystem.
+
+## ✨ Features
+
+- 🌐 User-friendly web interface
+- 💧 Automated FLOP token distribution
+- ⏱️ Cooldown system to prevent abuse
+- 🔒 Secure transaction handling
+- 📱 Responsive design for all devices
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- Web3 wallet (e.g., MetaMask)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/TechnoVisionDev/FlopFaucet.git
+cd FlopFaucet
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Configure environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Configuration
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Create a `.env` file in the root directory with the following variables:
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```env
+NETWORK_RPC_URL=your_rpc_url
+FAUCET_PRIVATE_KEY=your_private_key
+FLOP_CONTRACT_ADDRESS=contract_address
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 🔧 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Input your Flopcoin wallet address.
+3. Complete captcha to verify you are a human.
+4. Click "Request FLOP" to receive coins.
+5. Wait for the 1 hour cooldown period before requesting again.
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions are welcome! Here's how you can help:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/improvement`)
+3. Make your changes
+4. Commit your changes (`git commit -am 'Add new feature'`)
+5. Push to the branch (`git push origin feature/improvement`)
+6. Open a Pull Request
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## 📞 Contact
+
+- GitHub: [@TechnoVisionDev](https://github.com/TechnoVisionDev)
+- Project Link: [https://github.com/TechnoVisionDev/FlopFaucet](https://github.com/TechnoVisionDev/FlopFaucet)
+
+---
+<div align="center">
+Made with ❤️ by TechnoVision
+</div>
