@@ -5,6 +5,8 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { callFlopcoin } from '../lib/flopcoinRPC';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
+// Import the in-memory counter
+import { getTotalPaidOut } from '../lib/inMemoryStats';
 
 export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
   const [address, setAddress] = useState('');
@@ -33,7 +35,6 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
         setMessage(`Success! You can use the faucet again in one hour!\n TxID: ${data.txid}`);
       } else {
         setMessage(`Error: ${data.error}`);
-        // Reset the hCaptcha widget so a new token is generated
         if (hcaptchaRef.current) {
           hcaptchaRef.current.resetCaptcha();
         }
@@ -54,34 +55,21 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
     <>
       <Head>
         <title>Flopcoin Faucet</title>
-        {/* Standard favicon */}
         <link rel="icon" href="/favicon.ico" />
-
-        {/* For Apple devices */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-
-        {/* For Android Chrome */}
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </Head>
       <div className="min-h-screen flex flex-col bg-[#212121] text-white">
-        {/* Navbar */}
         <Navbar />
-
-        {/* Main Content */}
         <main className="flex-grow flex justify-center">
           <div className="w-full max-w-2xl px-6 sm:px-4 p-1 pt-0">
-            {/* Banner Image */}
             <div className="w-full">
-              <div
-                className="mx-auto mt-2"
-                style={{ transform: 'scale(1.2)', transformOrigin: 'center' }}
-              >
+              <div className="mx-auto mt-2" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }}>
                 <img src="/banner.png" alt="Banner" className="w-auto h-auto mt-12" />
               </div>
             </div>
 
-            {/* Stats Block */}
             <div className="flex justify-center mt-1">
               <div className="text-left text-gray-300 space-y-1 mb-4 text-base leading-normal">
                 <p className="flex items-center text-xl">
@@ -114,7 +102,6 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
               </div>
             </div>
 
-            {/* Claim Form */}
             <div className="mt-6">
               <div className="flex items-center space-x-2 mb-2">
                 <input
@@ -133,7 +120,6 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
                 </button>
               </div>
 
-              {/* hCaptcha */}
               <div className="mt-8 flex justify-center">
                 <HCaptcha
                   ref={hcaptchaRef}
@@ -142,7 +128,6 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
                 />
               </div>
 
-              {/* Message */}
               {message && (
                 <div
                   className={`mt-4 font-semibold text-center ${
@@ -165,22 +150,19 @@ export async function getServerSideProps() {
   let totalPaidOut = 0;
   let numPayouts = 0;
 
-  // Get the current faucet balance
   try {
     faucetBalance = await callFlopcoin('getbalance');
   } catch (err) {
     console.error('Error fetching faucet balance:', err);
   }
 
-  // Fetch the transaction history with a larger count
+  // Use the in-memory counter instead of on-chain calculations
   try {
-    let totalReceived = await callFlopcoin('getreceivedbyaddress', [process.env.NEXT_PUBLIC_FAUCET_ADDRESS]);
-    totalPaidOut = totalReceived - faucetBalance;
+    totalPaidOut = getTotalPaidOut();
   } catch (err) {
-    console.error('Error fetching transactions:', err);
+    console.error('Error fetching totalPaidOut:', err);
   }
 
-  // Format numbers
   if (typeof faucetBalance === 'number') {
     faucetBalance = Math.floor(faucetBalance).toLocaleString();
   }

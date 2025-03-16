@@ -1,5 +1,6 @@
 import { callFlopcoin } from '../../lib/flopcoinRPC';
 import axios from 'axios';
+import { addToTotalPaidOut } from '../../lib/inMemoryStats';
 
 // In-memory rate limiting store
 const claimHistory = {};
@@ -12,16 +13,11 @@ const claimHistory = {};
 function getUserIdentifier(req) {
   const xForwardedFor = req.headers['x-forwarded-for'];
   if (xForwardedFor) {
-    // If there are multiple IPs, take the first one.
     return xForwardedFor.split(',')[0].trim();
   }
   return req.socket.remoteAddress;
 }
 
-/**
- * Optionally clean expired entries.
- * This helps prevent the in-memory store from growing indefinitely.
- */
 function cleanupClaimHistory() {
   const now = Date.now();
   for (const [key, expiry] of Object.entries(claimHistory)) {
@@ -32,7 +28,6 @@ function cleanupClaimHistory() {
 }
 
 export default async function handler(req, res) {
-  // Only accept POST requests.
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -42,10 +37,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing address or hCaptcha token' });
   }
 
-  // 1) Verify hCaptcha token using URL-encoded form data.
   try {
     const verifyURL = 'https://hcaptcha.com/siteverify';
-    const secretKey = process.env.HCAPTCHA_SECRET_KEY; // Server-only variable
+    const secretKey = process.env.HCAPTCHA_SECRET_KEY;
 
     const params = new URLSearchParams();
     params.append('secret', secretKey);
@@ -66,8 +60,6 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Failed to verify captcha!' });
   }
 
-  // 2) Check rate limiting using a better user identifier.
-  // Clean up expired entries (optional but useful for a long-running server).
   cleanupClaimHistory();
 
   const userIdentifier = getUserIdentifier(req);
@@ -78,19 +70,19 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'You have already claimed in the last hour!' });
   }
 
-  // 3) Process the payout
   try {
-    // Validate the provided FLOP address.
     const validate = await callFlopcoin('validateaddress', [address]);
     if (!validate || !validate.isvalid) {
       return res.status(400).json({ error: 'Invalid FLOP address!' });
     }
 
-    const amountToSend = process.env.NEXT_PUBLIC_FAUCET_REWARD; // FLOP reward per claim from config
+    const amountToSend = parseFloat(process.env.NEXT_PUBLIC_FAUCET_REWARD);
     const txid = await callFlopcoin('sendtoaddress', [address, amountToSend]);
 
-    // 4) Record the claim to enforce the one-hour limit.
     claimHistory[userIdentifier] = now + oneHour;
+
+    // Update the in-memory counter.
+    addToTotalPaidOut(amountToSend);
 
     return res.status(200).json({ txid });
   } catch (error) {
