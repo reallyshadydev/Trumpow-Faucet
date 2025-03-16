@@ -85,12 +85,6 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
                   </span>
                 </p>
                 <p className="flex items-center text-xl">
-                  <span className="mr-2 text-xl">💰</span>
-                  <span>
-                    Total Paid Out: <b>{totalPaidOut} FLOP</b>
-                  </span>
-                </p>
-                <p className="flex items-center text-xl">
                   <span className="mr-2 text-xl">❤️</span>
                   <span>
                     <a href="/donate" className="underline text-[#e979be] hover:text-[#e979be]">
