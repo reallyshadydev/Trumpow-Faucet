@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { callFlopcoin } from '../lib/flopcoinRPC';
+import { callTrumpow } from '../lib/trumpowRPC';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 // Import the in-memory counter
@@ -54,7 +54,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
   return (
     <>
       <Head>
-        <title>Flopcoin Faucet</title>
+        <title>Trumpow Faucet</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -75,13 +75,13 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
                 <p className="flex items-center text-xl">
                   <span className="mr-2 text-xl">⏰</span>
                   <span>
-                    You can claim <b>{process.env.NEXT_PUBLIC_FAUCET_REWARD} FLOP</b> every hour.
+                    You can claim <b>{process.env.NEXT_PUBLIC_FAUCET_REWARD} TRMP</b> every hour.
                   </span>
                 </p>
                 <p className="flex items-center text-xl">
                   <span className="mr-2">🏦</span>
                   <span>
-                    Faucet Balance: <b>{faucetBalance} FLOP</b>
+                    Faucet Balance: <b>{faucetBalance} TRMP</b>
                   </span>
                 </p>
                 <p className="flex items-center text-xl">
@@ -100,7 +100,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
               <div className="flex items-center space-x-2 mb-2">
                 <input
                   type="text"
-                  placeholder="Enter your FLOP address"
+                  placeholder="Enter your TRMP address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   className="border border-gray-600 bg-gray-700 text-white rounded placeholder-gray-400 h-14 w-[600px] pl-4 pr-2"
@@ -145,7 +145,7 @@ export async function getServerSideProps() {
   let numPayouts = 0;
 
   try {
-    faucetBalance = await callFlopcoin('getbalance');
+    faucetBalance = await callTrumpow('getbalance');
   } catch (err) {
     console.error('Error fetching faucet balance:', err);
   }

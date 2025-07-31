@@ -8,18 +8,18 @@
 [![Issues](https://img.shields.io/github/issues/TechnoVisionDev/FlopFaucet)](https://github.com/TechnoVisionDev/FlopFaucet/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/TechnoVisionDev/FlopFaucet)](https://github.com/TechnoVisionDev/FlopFaucet/pulls)
 
-_A web-based faucet for distributing free Flopcoin (FLOP) to the community! 🪙_
+_A web-based faucet for distributing free Trumpow (TRMP) to the community! 🪙_
 
 </div>
 
 ## 📝 Description
 
-FlopFaucet is a web application designed to distribute free Flopcoin (FLOP) to community members. This faucet serves as an entry point for new users to obtain their initial FLOP tokens and participate in the Flopcoin ecosystem.
+FlopFaucet is a web application designed to distribute free Trumpow (TRMP) to community members. This faucet serves as an entry point for new users to obtain their initial TRMP tokens and participate in the Trumpow ecosystem.
 
 ## ✨ Features
 
 - 🌐 User-friendly web interface
-- 💧 Automated FLOP token distribution
+- 💧 Automated TRMP token distribution
 - ⏱️ Cooldown system to prevent abuse
 - 🔒 Secure transaction handling
 - 📱 Responsive design for all devices
@@ -67,14 +67,14 @@ Create a `.env` file in the root directory with the following variables:
 ```env
 NETWORK_RPC_URL=your_rpc_url
 FAUCET_PRIVATE_KEY=your_private_key
-FLOP_CONTRACT_ADDRESS=contract_address
+TRMP_CONTRACT_ADDRESS=contract_address
 ```
 
 ## 🔧 Usage
 
-2. Input your Flopcoin wallet address.
+2. Input your Trumpow wallet address.
 3. Complete captcha to verify you are a human.
-4. Click "Request FLOP" to receive coins.
+4. Click "Request TRMP" to receive coins.
 5. Wait for the 1 hour cooldown period before requesting again.
 
 ## 🤝 Contributing
