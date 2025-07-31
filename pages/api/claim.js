@@ -1,4 +1,4 @@
-import { callFlopcoin } from '../../lib/flopcoinRPC';
+import { callTrumpow } from '../../lib/trumpowRPC';
 import axios from 'axios';
 import { addToTotalPaidOut } from '../../lib/inMemoryStats';
 
@@ -71,13 +71,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const validate = await callFlopcoin('validateaddress', [address]);
+    const validate = await callTrumpow('validateaddress', [address]);
     if (!validate || !validate.isvalid) {
-      return res.status(400).json({ error: 'Invalid FLOP address!' });
+      return res.status(400).json({ error: 'Invalid TRMP address!' });
     }
 
     const amountToSend = parseFloat(process.env.NEXT_PUBLIC_FAUCET_REWARD);
-    const txid = await callFlopcoin('sendtoaddress', [address, amountToSend]);
+    const txid = await callTrumpow('sendtoaddress', [address, amountToSend]);
 
     claimHistory[userIdentifier] = now + oneHour;
 

@@ -28,12 +28,12 @@ export default function Navbar() {
             Donate
           </Link>
           <Link
-            href="https://flopcoin.net"
+            href="https://trumpow.meme/"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#df3da1] text-white px-4 py-2 rounded text-lg font-ubuntu hover:bg-[#ce228c] hover:text-white"
           >
-            Flopcoin.net
+            Trumpow.meme
           </Link>
         </nav>
         {/* Hamburger icon for mobile */}
@@ -63,14 +63,14 @@ export default function Navbar() {
                 Donate
               </a>
             </Link>
-            <Link legacyBehavior href="https://flopcoin.net">
+            <Link legacyBehavior href="https://trumpow.meme/">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
                 className="w-full text-center bg-[#df3da1] text-white px-4 py-2 rounded text-lg font-ubuntu hover:bg-[#ce228c]"
               >
-                Flopcoin.net
+                Trumpow.meme
               </a>
             </Link>
           </nav>
