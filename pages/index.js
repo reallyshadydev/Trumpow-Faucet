@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { callFlopcoin } from '../lib/flopcoinRPC';
+import { callTrumpow } from '../lib/trumpowRPC';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 // Import the in-memory counter
@@ -54,7 +54,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
   return (
     <>
       <Head>
-        <title>Flopcoin Faucet</title>
+        <title>Trumpow Faucet</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -145,7 +145,7 @@ export async function getServerSideProps() {
   let numPayouts = 0;
 
   try {
-    faucetBalance = await callFlopcoin('getbalance');
+    faucetBalance = await callTrumpow('getbalance');
   } catch (err) {
     console.error('Error fetching faucet balance:', err);
   }
