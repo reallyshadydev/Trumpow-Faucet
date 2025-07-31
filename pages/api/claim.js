@@ -73,7 +73,7 @@ export default async function handler(req, res) {
   try {
     const validate = await callTrumpow('validateaddress', [address]);
     if (!validate || !validate.isvalid) {
-      return res.status(400).json({ error: 'Invalid FLOP address!' });
+      return res.status(400).json({ error: 'Invalid TRMP address!' });
     }
 
     const amountToSend = parseFloat(process.env.NEXT_PUBLIC_FAUCET_REWARD);

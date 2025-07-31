@@ -25,7 +25,7 @@ export default function DonatePage() {
         </p>
         <div className="my-4">
             <div className="bg-black text-white p-4 rounded-md w-full overflow-auto text-center">
-                <b>FLOP:</b> FDm3UURY7sZobJ3BbKRUX4twBx2d52oSEU<br/>
+                <b>TRMP:</b> FDm3UURY7sZobJ3BbKRUX4twBx2d52oSEU<br/>
                 <b>DOGE:</b> DDuWyhLXsDVtZHedgBoVxgfhroJbEiZ3sT<br/>
                 <b>BTC:</b> 3CaUXmAjkBa4PgvJy38yRou5tjHxDPTfZn<br/>
                 <b>ETH:</b> 0x609D11cC3839ebBb48C7604347700B7a450E0e55

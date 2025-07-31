@@ -75,13 +75,13 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
                 <p className="flex items-center text-xl">
                   <span className="mr-2 text-xl">⏰</span>
                   <span>
-                    You can claim <b>{process.env.NEXT_PUBLIC_FAUCET_REWARD} FLOP</b> every hour.
+                    You can claim <b>{process.env.NEXT_PUBLIC_FAUCET_REWARD} TRMP</b> every hour.
                   </span>
                 </p>
                 <p className="flex items-center text-xl">
                   <span className="mr-2">🏦</span>
                   <span>
-                    Faucet Balance: <b>{faucetBalance} FLOP</b>
+                    Faucet Balance: <b>{faucetBalance} TRMP</b>
                   </span>
                 </p>
                 <p className="flex items-center text-xl">
@@ -100,7 +100,7 @@ export default function Home({ faucetBalance, totalPaidOut, numPayouts }) {
               <div className="flex items-center space-x-2 mb-2">
                 <input
                   type="text"
-                  placeholder="Enter your FLOP address"
+                  placeholder="Enter your TRMP address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   className="border border-gray-600 bg-gray-700 text-white rounded placeholder-gray-400 h-14 w-[600px] pl-4 pr-2"
