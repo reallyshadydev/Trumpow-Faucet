@@ -1,12 +1,12 @@
-# 🚰 FlopFaucet
+# 🚰 TRMPFaucet
 
 <div align="center">
 
 [![JavaScript](https://img.shields.io/badge/JavaScript-81.9%25-yellow.svg)]()
 [![CSS](https://img.shields.io/badge/CSS-18.1%25-blue.svg)]()
-[![License](https://img.shields.io/github/license/TechnoVisionDev/FlopFaucet)](LICENSE)
-[![Issues](https://img.shields.io/github/issues/TechnoVisionDev/FlopFaucet)](https://github.com/TechnoVisionDev/FlopFaucet/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/TechnoVisionDev/FlopFaucet)](https://github.com/TechnoVisionDev/FlopFaucet/pulls)
+[![License](https://img.shields.io/github/license/reallyshadydev/Trumpow-Faucet)](LICENSE)
+[![Issues](https://img.shields.io/github/issues/reallyshadydev/Trumpow-Faucet)](https://github.com/reallyshadydev/Trumpow-Faucet/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/reallyshadydev/Trumpow-Faucet)](https://github.com/reallyshadydev/Trumpow-Faucet/pulls)
 
 _A web-based faucet for distributing free Trumpow (TRMP) to the community! 🪙_
 
@@ -14,7 +14,7 @@ _A web-based faucet for distributing free Trumpow (TRMP) to the community! 🪙_
 
 ## 📝 Description
 
-FlopFaucet is a web application designed to distribute free Trumpow (TRMP) to community members. This faucet serves as an entry point for new users to obtain their initial TRMP tokens and participate in the Trumpow ecosystem.
+TRMPFaucet is a web application designed to distribute free Trumpow (TRMP) to community members. This faucet serves as an entry point for new users to obtain their initial TRMP tokens and participate in the Trumpow ecosystem.
 
 ## ✨ Features
 
@@ -36,8 +36,8 @@ FlopFaucet is a web application designed to distribute free Trumpow (TRMP) to co
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/TechnoVisionDev/FlopFaucet.git
-cd FlopFaucet
+git clone https://github.com/reallyshadydev/Trumpow-Faucet.git
+cd Trumpow-Faucet
 ```
 
 2. Install dependencies:
@@ -96,10 +96,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- GitHub: [@TechnoVisionDev](https://github.com/TechnoVisionDev)
-- Project Link: [https://github.com/TechnoVisionDev/FlopFaucet](https://github.com/TechnoVisionDev/FlopFaucet)
+- GitHub: [@reallyshadydev](https://github.com/reallyshadydev)
+- Project Link: [https://github.com/reallyshadydev/Trumpow-Faucet](https://github.com/reallyshadydev/Trumpow-Faucet)
 
 ---
 <div align="center">
-Made with ❤️ by TechnoVision
+Made with ❤️ by reallyshadydev
 </div>
